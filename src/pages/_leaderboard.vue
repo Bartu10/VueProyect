@@ -1,7 +1,9 @@
 <template>
 
 
-
+<v-select label="Select" :items="selectContinent" v-model="selectedContinent"></v-select>
+<v-select label="Select" :items="selectTeam" v-model="selectedTeam"></v-select>
+<v-select label="Select" :items="select" v-model="selected"></v-select>
     
   <v-table style="padding: 10px;" >
       <thead>
