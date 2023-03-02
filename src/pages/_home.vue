@@ -1,8 +1,7 @@
 <template>
-          <v-card-title>
-          <h1>Social Opinions</h1>
-        </v-card-title>
-    
+  <v-card-title>
+    <h1>Social Opinions</h1>
+  </v-card-title>
   <v-card v-if="this.$store.state.logged == true" 
     class="mx-auto"
     color="#26c6da"
@@ -11,6 +10,7 @@
     prepend-icon="mdi-twitter"
     title="Twitter"
   >
+
     <template v-slot:prepend>
       <v-icon size="x-large"></v-icon>
     </template>
@@ -233,7 +233,7 @@
     </v-card-actions>
   </v-card>
   <v-card v-if="this.$store.state.logged == false">
-  
+
   </v-card>
 
   </template>
@@ -293,8 +293,6 @@ likePost(index) {
         this.likes[index].number--;
         this.likes[index].liked = false
       }
-
-
     }
 }
 
