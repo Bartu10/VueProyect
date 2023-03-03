@@ -1,21 +1,15 @@
 <template>
   <v-item-group mandatory>
-    <v-container style="padding-top: 5%; margin-left: 150px; margin-right: 0; ">
-      <v-row style="padding-left: 300px;text-align: center; display: grid; grid-template-columns: auto auto auto auto auto;">
-        <div class="equipos" v-for="n in players" :key="n" cols="5" md="2" width="100%">
+    <v-container style="padding-top: 5%;">
+      <v-row style="text-align: center;">
+        <div class="equipos" v-on:click="handleClick(n.id)" v-for="n in players" :key="n" cols="5" md="2" width="100%">
           <v-item>
           <v-card>
             <div>
-              <v-img height="200px" :src=n.icon></v-img>
-            <h2>{{n.name}}</h2>
-        <v-rating v-model="n.puntuacion" color="red" active-color="red" half-increments size="60" readonly
+              <v-img height="500px"  :src=n.icon></v-img>
+            <h2 class="name">{{n.name}}</h2>
+        <v-rating v-model="n.puntuacion" color="red" active-color="red" half-increments size="90" readonly
       ></v-rating>
-      <v-btn
-          v-on:click="handleClick(n)"
-          icon="mdi-heart"
-          color="primary"
-
-        ></v-btn>
                 </div>
             </v-card>
           </v-item>
@@ -36,10 +30,8 @@ export default {
   }),
   methods:{
     handleClick(n){
-        // Replace this with your own method for updating the user's profile data
-          console.log(n)
-          this.$store.commit('setPilotoFav', n)
-          console.log(this.$store.state.pilotoFav)
+      console.log("eijhfue")
+        this.$router.push(`/pilot/${n}`)
       }
   },
 
@@ -63,4 +55,18 @@ export default {
   padding: 10px;
   margin-left: 0; 
 }
+
+.v-card{
+  width: 30vw;
+  height: 80vh;
+}
+
+.v-img{
+  margin-bottom:80px ;
+}
+
+.name{
+  font-size: 2em;
+}
+
 </style>

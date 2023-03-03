@@ -1,6 +1,6 @@
 
 <template>
-    <v-card style="padding-top: 80px;">
+    <v-card>
       <v-card-title>My Profile</v-card-title>
   
       <v-card-text v-if="edit == true">
@@ -15,7 +15,7 @@
             <v-text-field label="Age" v-model="user.age"></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
-            <v-text-field label="Password" v-model="user.password"></v-text-field>
+            <v-text-field label="Password" type="password" v-model="user.password"></v-text-field>
           </v-col>
           
         </v-row>
@@ -25,16 +25,20 @@
       <v-card-text v-if="edit == false">
         <v-row>
           <v-col cols="12" md="6" >
+            <h4>name</h4>
             <h2>{{user.name}}</h2>
           </v-col>
           <v-col cols="12" md="6">
+            <h4>email</h4>
             <h2>{{user.email}}</h2>
           </v-col>
           <v-col cols="12" md="6">
+            <h4>age</h4>
             <h2>{{user.age}}</h2>
           </v-col>
           <v-col cols="12" md="6">
-            <h2>{{user.password}}</h2>
+            <h4>password</h4>
+            <h2>{{passwordEnc}}</h2>
           </v-col>
         </v-row>
       </v-card-text>
@@ -53,18 +57,22 @@
   export default {
     data() {
       return {
+        passwordEnc: '',
         edit: false,
         user: {
           name: '',
           email: '',
           age: '',
           password: '',
-
         }
       };
     },
     
     methods: {
+
+      changetoEncrypt(){
+        this.passwordEnc = '*'.repeat(this.user.password.length); 
+      },
 
       async updateProfile() {
         // Replace this with your own method for updating the user's profile data
@@ -76,6 +84,7 @@
         .then(res => res.json())
         .then(data => {
             this.user = data
+            this.changetoEncrypt()
         })
       }
     },
@@ -88,9 +97,27 @@
       this.user.email = user.email
       this.user.age = user.age
       this.user.password = user.password
+      this.changetoEncrypt()
     }
   };
   </script>
+
+<style lang="scss">
+    
+.v-row{
+align-items: center;
+text-align: center;
+flex-direction: column;
+justify-content: space-around;
+}
+
+.v-card{
+  
+  margin-top: 80px;
+}
+
+
+</style>
 
   
   

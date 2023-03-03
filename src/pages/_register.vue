@@ -9,7 +9,7 @@
               <v-text-field v-model="name" label="Name" required></v-text-field>
               <v-text-field v-model="email" label="Email" required type="email"></v-text-field>
               <v-text-field v-model.number="age" label="Age" required type="number"></v-text-field>
-              <v-text-field v-model.number="password" label="Password" required></v-text-field>
+              <v-text-field type="password" v-model.number="password" label="Password" required></v-text-field>
               <v-btn type="submit" color="primary">Create User</v-btn>
             </v-form>
           </v-card-text>
@@ -35,8 +35,6 @@ export default {
         email: this.email,
         age: this.age,
         password: this.password,
-        favoriteTeam: '',
-        favoritePilots: '',
         
       };
       fetch('https://f1guideapi2.onrender.com/users/users', {
