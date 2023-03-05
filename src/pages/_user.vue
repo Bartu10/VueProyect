@@ -2,7 +2,6 @@
 <template>
     <v-card>
       <v-card-title>My Profile</v-card-title>
-  
       <v-card-text v-if="edit == true">
         <v-row>
           <v-col cols="12" sm="6" >
@@ -45,6 +44,7 @@
       
       <v-card-actions>
         <v-spacer></v-spacer>
+        <v-btn color="primary" v-if="edit == false" @click="makeDelete()">Delete User</v-btn>
         <v-btn color="primary" v-if="edit == true" @click="updateProfile(), edit = false">Save Changes</v-btn>
         <v-btn color="primary" v-if="edit == false" @click="edit = true">Editar</v-btn>
       </v-card-actions>
@@ -74,9 +74,29 @@
         this.passwordEnc = '*'.repeat(this.user.password.length); 
       },
 
+      makeDelete(){
+        this.$router.push('/login');
+        this.deleteUser()
+        this.$store.commit('setLogged', false)
+        
+
+      }
+      ,
+
+
+      async deleteUser(){
+        await fetch(`https://f1guideapi2.onrender.com/users/users/${this.$store.state.id}`,
+        {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+        })
+        .then(res => res.json())
+      }
+,
       async updateProfile() {
         // Replace this with your own method for updating the user's profile data
-        await fetch(`https://f1guideapi2.onrender.com/users/users/${this.$store.state.id}`, {
+        await fetch(`https://f1guideapi2.onrender.com/users/users/${this.$store.state.id}`,
+         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(this.user)

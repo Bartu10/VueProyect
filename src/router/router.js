@@ -1,13 +1,12 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 import store from '../store'
 const routes = [
-    { path: '/', component: () => import('../pages/_home.vue') },
+    { path: '/comunity', component: () => import('../pages/_home.vue') },
     { path: '/user', component: () => import('../pages/_user.vue'), meta: {requiresAuth: true}},
-    { path: '/pilot/:id', component: () => import('../pages/_OnePilot.vue'), meta: {requiresAuth: true}},
     { path: '/pilots/:id', component: () => import('../pages/_pilot.vue'), meta: {requiresAuth: true} },
     { path: '/pilots', component: () => import('../pages/_pilots.vue'), meta: {requiresAuth: true} },
     { path: '/register', component: () => import('../pages/_register.vue')},
-    { path: '/login', component: () => import('../pages/_login.vue') },
+    { path: '/', component: () => import('../pages/_login.vue') },
     { path: '/leaderboard', component: () => import('../pages/_leaderboard.vue'),meta: {requiresAuth: true}},
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../shared/NoPageFound.vue') }
   ]

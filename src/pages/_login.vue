@@ -1,14 +1,15 @@
 <template>
-    <v-container>
+    <v-container style="margin-top: 80px;">
       <v-card>
         <v-card-title>
           <h1>Login</h1>
         </v-card-title>
         <v-card-text>
-          <v-form @submit.prevent="login">
+          <v-form @submit.prevent="login" style="padding: 10px;">
             <v-text-field v-model="email" label="Email" required type="email"></v-text-field>
             <v-text-field v-model="password" label="Password" required type="password"></v-text-field>
             <v-btn type="submit" color="primary">Login</v-btn>
+            You dont have account? Register <router-link class="link" to="/register" style="color: red; text-decoration: none;">here</router-link>
           </v-form>
         </v-card-text>
       </v-card>
