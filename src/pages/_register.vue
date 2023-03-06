@@ -71,7 +71,7 @@ export default {
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        this.$router.push('/login');
+        this.$router.push('/');
       })
       .catch(err => console.error(err));
     }

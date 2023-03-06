@@ -1,5 +1,6 @@
 <template>
   <v-item-group mandatory>
+    <button v-on:click="goBack()"><span class="mdi mdi-arrow-left"></span></button>
     <v-container style="padding-top: 5%; margin-left: 150px; margin-right: 0; ">
       <v-row style="display: grid; grid-template-columns: auto auto auto auto auto;">
         <div class="equipos" v-on:click="handleClick(n.name)" v-for="n in teams.teams" :key="n" cols="5" md="2" width="100%">
@@ -42,6 +43,9 @@ export default {
     .then((res) => res.json())
     this.teams = teams 
 },
+goBack() {
+      this.$router.go(-1);
+    },
 
 }
 

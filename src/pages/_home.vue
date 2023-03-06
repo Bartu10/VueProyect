@@ -1,7 +1,8 @@
 <template>
-  <v-card-title>
+  <v-card-title v-if="this.$store.state.logged == true">
     <h1>Social Opinions</h1>
   </v-card-title>
+  <button v-on:click="goBack()"><span class="mdi mdi-arrow-left"></span></button>
   <v-card v-if="this.$store.state.logged == true" 
     class="mx-auto"
     color="#26c6da"
@@ -281,6 +282,10 @@ export default {
 
 
 methods:{
+
+  goBack() {
+      this.$router.go(-1);
+    },
 likePost(index) {
       // incrementa la cantidad de likes para el sitio seleccionado
       if(this.likes[index].liked == false){

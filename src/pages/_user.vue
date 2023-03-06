@@ -1,6 +1,8 @@
 
 <template>
+  <button v-on:click="goBack()"><span class="mdi mdi-arrow-left"></span></button>
     <v-card>
+      
       <v-card-title>My Profile</v-card-title>
       <v-card-text v-if="edit == true">
         <v-row>
@@ -69,7 +71,9 @@
     },
     
     methods: {
-
+      goBack() {
+      this.$router.go(-1);
+    },
       changetoEncrypt(){
         this.passwordEnc = '*'.repeat(this.user.password.length); 
       },
@@ -122,8 +126,7 @@
   };
   </script>
 
-<style lang="scss">
-    
+<style lang="scss" >
 .v-row{
 align-items: center;
 text-align: center;
@@ -133,7 +136,7 @@ justify-content: space-around;
 
 .v-card{
   
-  margin-top: 80px;
+  margin: 90px;
 }
 
 

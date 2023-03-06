@@ -1,5 +1,6 @@
 <template>
   <v-item-group mandatory>
+    <button v-on:click="goBack()"><span class="mdi mdi-arrow-left"></span></button>
     <v-container style="padding-top: 5%;">
       <v-row style="text-align: center;">
         <div class="equipos" v-for="n in players" :key="n" cols="5" md="2" width="100%">
@@ -40,7 +41,12 @@ export default {
     .then((res) => res.json())
     this.players = players
 },
-}
+
+goBack() {
+      this.$router.go(-1);
+    },
+  }
+
 </script>
 
 <style scoped>
@@ -80,4 +86,6 @@ export default {
 .number{
   font-family: 'number';
 }
+
+
 </style>

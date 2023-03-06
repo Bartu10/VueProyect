@@ -1,35 +1,36 @@
 <template>
 
-
-<v-select label="Select" :items="selectContinent" v-model="selectedContinent"></v-select>
-<v-select label="Select" :items="selectTeam" v-model="selectedTeam"></v-select>
-<v-select label="Select" :items="select" v-model="selected"></v-select>
-    
-  <v-table style="padding: 10px;" >
+<button v-on:click="goBack()"><span class="mdi mdi-arrow-left"></span></button>
+<div style="display: flex; justify-content: space-evenly; ">
+<v-select class="filter"  label="Select" :items="selectContinent" v-model="selectedContinent"></v-select>
+<v-select class="filter"  label="Select" :items="selectTeam" v-model="selectedTeam"></v-select>
+<v-select class="filter"  label="Select" :items="select" v-model="selected"></v-select>
+</div>
+  <v-table style="padding: 2px;" >
       <thead>
         <tr>
-          <th class="text-left">
+          <th style="background-color: red; color: white;" class="text-left">
             Number
           </th>
-          <th class="text-left">
+          <th style="background-color: red; color: white;" class="text-left">
             Name
           </th>
-          <th class="text-left">
+          <th style="background-color: red; color: white;" class="text-left">
             Team
           </th>
-          <th class="text-left">
+          <th style="background-color: red; color: white;" class="text-left">
             {{ selected }}
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr
+        <tr 
           v-for="x in pilots"
           :key="x">
-          <td>{{ x.number }}</td>
-          <td>{{ x.name }}</td>
-          <td>{{ x.team }}</td>
-          <td>{{ x[selected] }}</td>
+          <td style="font-size: small;">{{ x.number }}</td>
+          <td style="font-size: small; background-color: beige;">{{ x.name }}</td>
+          <td style="font-size: small;">{{ x.team }}</td>
+          <td style="font-size: small; background-color: beige;">{{ x[selected] }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -55,6 +56,11 @@ this.allPilots()
 
   
   methods:{
+
+    goBack() {
+      this.$router.go(-1);
+    },
+
     async allPilots(){
       var pilots = await fetch(`https://f1guideapi2.onrender.com/pilotos/api/pilots`)
     .then((res) => res.json())
@@ -99,3 +105,11 @@ this.allPilots()
 
 
 </script>
+
+<style scoped>
+.filter{
+  width: 20px;
+  margin: 20px;
+  
+}
+</style>

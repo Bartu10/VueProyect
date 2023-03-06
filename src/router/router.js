@@ -20,7 +20,7 @@ const routes = [
     const currentAuth = store.state.logged;
     const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
     if (requiresAuth && !currentAuth) {
-      next("/login");
+      next("/");
     } else next();
   });
 
