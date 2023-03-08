@@ -13,12 +13,24 @@
           </v-form>
         </v-card-text>
       </v-card>
-      <v-alert
-    v-if = "this.logged"
-    type="success"
-    title="Alert title"
-    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
-  ></v-alert>
+      <div class="text-center">
+    <v-snackbar
+      v-model="snackbar"
+      multi-line
+    >
+      {{ "Lo siento, parece que has introducido una información incorrecta al intentar iniciar sesión. Por favor, verifica que tus credenciales son correctas y vuelve a intentarlo." }}
+
+      <template v-slot:actions>
+        <v-btn
+          color="red"
+          variant="text"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+  </div>
     </v-container>
   </template>
   
@@ -26,6 +38,7 @@
   export default {
     data() {
       return {
+        snackbar: false,
         logged: false,
         error: false, 
         datoSend: "",
@@ -81,6 +94,8 @@
           } else {
             // credenciales inválidas, mostrar mensaje de error
             this.error = true
+            this.snackbar = true
+
             console.error(data.message);
 
           }
