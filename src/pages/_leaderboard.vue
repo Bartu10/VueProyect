@@ -2,8 +2,8 @@
 
 <button v-on:click="goBack()"><span class="mdi mdi-arrow-left"></span></button>
 <div style="display: flex; justify-content: space-evenly; ">
-<v-select class="filter"  label="Select" :items="selectContinent" v-model="selectedContinent"></v-select>
-<v-select class="filter"  label="Select" :items="selectTeam" v-model="selectedTeam"></v-select>
+<v-select class="filter"  label="Select Continent" :items="selectContinent" v-model="selectedContinent"></v-select>
+<v-select class="filter"  label="Select Team" :items="selectTeam" v-model="selectedTeam"></v-select>
 <v-select class="filter"  label="Select" :items="select" v-model="selected"></v-select>
 </div>
   <v-table style="padding: 2px;" >
