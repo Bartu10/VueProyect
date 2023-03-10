@@ -34,6 +34,10 @@
         </tr>
       </tbody>
     </v-table>
+    <div style="display: flex; justify-content: space-evenly;">
+    <v-btn :v-if="page2.length > 1" v-on:click="changePage(1)">1</v-btn>
+    <v-btn :v-if="page2.length > 1" v-on:click="changePage(2)" :disabled="page2.length == 0" >2</v-btn>
+    </div>
 </template>
 
 <script>
@@ -41,6 +45,9 @@
 export default {
   
     data: () => ({
+      page : 1,
+      page1: [],
+      page2:[],
       pilots : [],
       selected : 'wins',
       select : ['championships', 'wins'],
@@ -56,7 +63,16 @@ this.allPilots()
 
   
   methods:{
-
+    changePage(n){
+    if (n == 1){
+      console.log(this.page1)
+      this.pilots = this.page1
+    }
+    else if(n == 2){
+      console.log(this.page2)
+      this.pilots = this.page2
+    }
+  },
     goBack() {
       this.$router.go(-1);
     },
@@ -66,8 +82,19 @@ this.allPilots()
     .then((res) => res.json())
     let ordered = pilots.sort((a, b) => a[this.selected] - b[this.selected]);
   ordered = ordered.reverse();
-    this.pilots = ordered
+  this.page1 = []
+  this.page2 = []
+
+  for(let x in ordered){
+      if (this.page1.length < 10){
+      this.page1.push(ordered[x])
     }
+    else{
+      this.page2.push(ordered[x])
+    }}
+  console.log(this.page1)
+  this.pilots = this.page1
+  }
   },
   
     
@@ -82,6 +109,10 @@ this.allPilots()
       .then((res) => res.json())
       let ordered = pilots.sort((a, b) => a[this.selected] - b[this.selected]);
       ordered = ordered.reverse();
+console.log(ordered)
+      this.page1 = ordered
+      this.page2 = []
+      
       this.pilots = ordered
       console.log(this.pilots) 
       }
@@ -95,8 +126,26 @@ this.allPilots()
       .then((res) => res.json())
       let ordered = pilots.sort((a, b) => a[this.selected] - b[this.selected]);
       ordered = ordered.reverse();
-      this.pilots = ordered
-      console.log(this.pilots)
+      console.log(ordered)
+      if(newValue == "Europe"){
+        this.page1 = []
+        this.page2 = []
+        for (let x in ordered){
+        if (this.page1.length < 10){
+          this.page1.push(ordered[x])    
+        }
+        if (this.page1.length == 10){
+          this.page2.push(ordered[x])
+        }
+      }
+      this.pilots = this.page1
+      }
+      else{
+        this.page1 = ordered
+        this.page2 = []
+        this.pilots = this.page1
+      }
+
       }  
     }
     },
