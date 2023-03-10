@@ -7,6 +7,7 @@ const routes = [
     { path: '/pilots', component: () => import('../pages/_pilots.vue'), meta: {requiresAuth: true} },
     { path: '/register', component: () => import('../pages/_register.vue')},
     { path: '/', component: () => import('../pages/_login.vue') },
+    { path: '/favorites', component: () => import('../pages/_favorite.vue'),meta: {requiresAuth: true}},
     { path: '/leaderboard', component: () => import('../pages/_leaderboard.vue'),meta: {requiresAuth: true}},
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../shared/NoPageFound.vue') }
   ]

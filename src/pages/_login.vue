@@ -1,5 +1,5 @@
 <template>
-    <v-container style="margin-top: 80px;">
+    <v-container v-if="this.$store.state.logged == false" style="margin-top: 80px;">
       <v-card>
         <v-card-title>
           <h1>Login</h1>
@@ -32,6 +32,11 @@
     </v-snackbar>
   </div>
     </v-container>
+
+    <v-container v-if="this.$store">
+
+
+    </v-container>
   </template>
   
   <script>
@@ -46,7 +51,9 @@
         password: ''
       }
     },
-    methods: {      
+
+    methods: {
+
       async takeId(email){
         await fetch('https://f1guideapi2.onrender.com/users/users')
         .then(res => res.json())
@@ -88,6 +95,7 @@
               console.log("eifheoufheorwfgheoruwfgh")
             }, 8000)
             this.logged = false
+            localStorage.removeItem('listado');
             this.$router.push('/pilots')
             // credenciales válidas, redirigir a la página principal
             

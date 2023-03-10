@@ -1,16 +1,36 @@
 <template>
+
     <v-item-group mandatory>
+      <h2 style="margin: 20px;">Pilotos Favoritos</h2>
       <v-container style="padding-top: 5%; margin-left: 150px; margin-right: 0; ">
         <v-row style="display: grid; grid-template-columns: auto auto auto auto auto;">
-          <div class="equipos" v-on:click="handleClick(n.id)" v-for="n in teams.teams" :key="n" cols="5" md="2" width="100%">
-            <v-item v-slot="{ isSelected, toggle }">
-              <v-card :color="isSelected ? 'primary' : ''"  @click="toggle">
+          <div class="equipos" v-for="n in pilots" :key="n" cols="5" md="2" width="100%">
+            
+            <v-item v-slot="{ isSelected}">
+
+              <v-card :color="isSelected ? 'primary' : ''"  >
               <v-scroll-y-transition>
               <div>
+                <button v-on:click="handleFav(n)"><span class="mdi mdi-heart"></span></button>
               <h2>{{n.name}}</h2>
-          <v-img :src=n.logo height="200px"></v-img>
+          <v-img :src=n.icon height="200px"></v-img>
           <v-rating v-model="n.puntuacion" color="red" active-color="red" half-increments size="60" readonly
         ></v-rating>
+        <v-snackbar
+      v-model="snackbar"
+    >
+      {{ this.text }}
+
+      <template v-slot:actions>
+        <v-btn
+          color="red"
+          variant="text"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
                   </div>
                 </v-scroll-y-transition>
               </v-card>
@@ -29,22 +49,33 @@
     data: () => ({
       rating: "2.5",
       page:"1",
-      teams: []
+      pilots: [],
+      snackbar: false,
+      text: ''   
     }),
   
-    methods: {
-      handleClick(n){
-        this.$router.push(`/pilots/${n}`)
-      }
-    },
-  
     async created(){
-      const teams = await fetch(`https://f1guideapi2.onrender.com/equipos/api/teams`)
-      .then((res) => res.json())
-      this.teams = teams 
-  },
-  
+      let pilots = JSON.parse(localStorage.getItem('listado')) || [];
+      this.pilots = pilots},
+    
+methods : {
+    handleFav(n){
+    let listado = JSON.parse(localStorage.getItem('listado')) || [];
+    for (let x in listado){
+      if (listado[x].id == n.id){
+        listado.splice(listado[n],1)
+        this.text = `${n.name} ha sido eliminado de favoritos`
+        this.snackbar = true
+      }
+    }
+    localStorage.setItem('listado', JSON.stringify(listado))
+    location.reload()
   }
+}
+
+
+  }
+
   
   </script>
   

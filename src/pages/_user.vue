@@ -46,6 +46,7 @@
       
       <v-card-actions>
         <v-spacer></v-spacer>
+        <v-btn color="primary" v-if="edit == false" @click="goFavs()">Go Favorites</v-btn>
         <v-btn color="primary" v-if="edit == false" @click="makeDelete()">Delete User</v-btn>
         <v-btn color="primary" v-if="edit == true" @click="updateProfile(), edit = false">Save Changes</v-btn>
         <v-btn color="primary" v-if="edit == false" @click="edit = true">Editar</v-btn>
@@ -79,14 +80,15 @@
       },
 
       makeDelete(){
-        this.$router.push('/login');
+        this.$router.push('/');
         this.deleteUser()
         this.$store.commit('setLogged', false)
-        
+      },
 
+      goFavs(){
+        this.$router.push('/favorites');
       }
-      ,
-
+,
 
       async deleteUser(){
         await fetch(`https://f1guideapi2.onrender.com/users/users/${this.$store.state.id}`,
